@@ -1,56 +1,69 @@
 #!/bin/bash
+# =================================================================
+# Tic-Tac-Toe Automated Deployment Script (IaC)
+# Target OS: Amazon Linux 2023
+# Author: Engineering Student / AWS Solutions Architect Aspirant
+# =================================================================
 
-# 1. Update and Install Dependencies
+set -e # Exit immediately if a command fails
+
+# 1. DEFINE VARIABLES
+PROJECT_NAME="TicTacToe-Beatable-AI"
+REPO_URL="https://github.com/AbhayChabuk/TicTacToe-Beatable-AI.git"
+INSTALL_DIR="/home/ec2-user/$PROJECT_NAME"
+
+echo "Step 1: Updating System & Installing Stack..."
 sudo dnf update -y
-sudo dnf install python3-pip git nginx -y
+sudo dnf install python3-pip python3-devel nginx git -y
 
-# 2. Clone the Repository
-cd /home/ec2-user
-git clone https://github.com/AbhayChabuk/TicTacToe-Beatable-AI.git
-cd TicTacToe-Beatable-AI
-
-# 3. Setup Virtual Environment and Install Requirements
+echo "Step 2: Cloning Repository & Setting up Venv..."
+if [ -d "$INSTALL_DIR" ]; then sudo rm -rf "$INSTALL_DIR"; fi
+git clone "$REPO_URL" "$INSTALL_DIR"
+cd "$INSTALL_DIR"
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-pip install gunicorn
+pip install -r requirements.txt gunicorn
 
-# 4. Create Gunicorn Systemd Service
-# This prevents the "203/EXEC" error by using absolute paths
-sudo bash -c 'cat > /etc/systemd/system/tictactoe.service <<EOF
+echo "Step 3: Creating Systemd Service for Gunicorn..."
+# This automates the background process with 1 worker for state consistency
+sudo bash -c "cat > /etc/systemd/system/tictactoe.service <<EOF
 [Unit]
-Description=Gunicorn instance to serve TicTacToe AI
+Description=Gunicorn instance for TicTacToe (Single Worker Mode)
 After=network.target
 
 [Service]
 User=ec2-user
 Group=nginx
-WorkingDirectory=/home/ec2-user/TicTacToe-Beatable-AI
-Environment="PATH=/home/ec2-user/TicTacToe-Beatable-AI/venv/bin"
-ExecStart=/home/ec2-user/TicTacToe-Beatable-AI/venv/bin/gunicorn --bind 0.0.0.0:5000 app:app
+WorkingDirectory=$INSTALL_DIR
+Environment=\"PATH=$INSTALL_DIR/venv/bin\"
+ExecStart=$INSTALL_DIR/venv/bin/gunicorn --workers 1 --bind 127.0.0.1:8000 application:application
 
 [Install]
 WantedBy=multi-user.target
-EOF'
+EOF"
 
-# 5. Configure Nginx as Reverse Proxy
-sudo bash -c 'cat > /etc/nginx/conf.d/tictactoe.conf <<EOF
+echo "Step 4: Configuring Nginx Reverse Proxy..."
+# This routes Port 80 traffic to Gunicorn on Port 8000
+sudo bash -c "cat > /etc/nginx/conf.d/tictactoe.conf <<EOF
 server {
     listen 80;
     server_name _;
 
     location / {
-        proxy_pass http://127.0.0.1:5000;
+        proxy_pass http://127.0.0.1:8000;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     }
 }
-EOF'
+EOF"
 
-# 6. Start and Enable Services
-sudo systemctl start tictactoe
-sudo systemctl enable tictactoe
+echo "Step 5: Starting Services..."
+sudo systemctl daemon-reload
+sudo systemctl enable --now tictactoe
 sudo systemctl restart nginx
-sudo systemctl enable nginx
 
-echo "Deployment Complete! Check your EC2 Public IP."
+echo "================================================================="
+echo "DEPLOYMENT SUCCESSFUL!"
+echo "Your Tic-Tac-Toe AI is live at: http://$(curl -s http://checkip.amazonaws.com)"
+echo "================================================================="
