@@ -2,7 +2,7 @@
 # =================================================================
 # Tic-Tac-Toe Automated Deployment Script (IaC)
 # Target OS: Amazon Linux 2023
-# Author: Engineering Student / AWS Solutions Architect Aspirant
+# Author: Abhay Chabuk
 # =================================================================
 
 set -e # Exit immediately if a command fails
