@@ -1,57 +1,44 @@
-# 🎮 Tic-Tac-Toe: Beatable AI on AWS
+# 🎮 Tic-Tac-Toe: Intelligent Rule-Based AI on AWS
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
-[![Flask](https://img.shields.io/badge/flask-%23000.svg?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+A production-grade web application featuring a heuristic-driven AI engine, deployed on a robust Amazon EC2 environment.
 
-An engineering-grade deployment of the classic Tic-Tac-Toe game, featuring an **Unbeatable AI** powered by the **Minimax Algorithm**. This project demonstrates a full-stack production lifecycle, from local development to a cloud-native deployment on **Amazon EC2**.
-
----
-
-## 🏗️ Deployment Architecture
-
-To ensure high availability and security, the application is deployed using a reverse-proxy architecture.
-
-
-
-* **Nginx**: Acts as the entry point (Reverse Proxy), handling incoming HTTP traffic on Port 80 and forwarding it to the application server.
-* **Gunicorn**: A WSGI HTTP Server that runs the Flask application. It is configured in **Single-Worker Mode** to ensure game state consistency across user moves.
-* **Systemd**: Manages the Gunicorn process as a background service, ensuring it automatically restarts if the server reboots.
-* **Amazon EC2**: Hosted on an **Amazon Linux 2023** t2.micro instance within the AWS Free Tier.
+## 🌐 Live Application
+The game is currently live and accessible at:  
+**[http://3.109.211.113](http://3.109.211.113)** *(Deployed on AWS Free Tier)*
 
 ---
 
-## 🧠 The "Brain": Minimax Algorithm
+## 🧠 AI Engine: Heuristic Decision Logic
+The AI utilizes a prioritized heuristic search to evaluate the board state. Rather than random placement, it follows a strict hierarchy of logic:
 
-The AI doesn't just play randomly; it thinks. I implemented the **Minimax Algorithm**, a recursive decision-making tool that explores all possible game outcomes.
-
-* **Recursive Depth-First Search**: The AI simulates every move until a win, loss, or draw is reached.
-* **Optimal Strategy**: It chooses moves that maximize its own score while minimizing the player's potential to win.
-* **Outcome**: The AI is mathematically unbeatable. The best result a human player can achieve is a draw.
+1.  **Immediate Win**: Scans for any move that completes a line of three for the AI.
+2.  **Defensive Block**: Identifies if the player is one move away from winning and blocks that path.
+3.  **Strategic Positioning**: Prioritizes taking the center square `board[1][1]` to maximize future winning lines.
+4.  **Corner Control**: Randomly selects available corners to create "fork" opportunities.
+5.  **Fallback**: Selects any remaining empty cell if no higher-priority moves are available.
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗️ Cloud Architecture
+This project demonstrates a professional-grade web stack optimized for AWS environments.
 
-* **Backend**: Python 3.9+, Flask
-* **Frontend**: Vanilla JavaScript (ES6+), CSS3, HTML5
-* **Web Server**: Nginx
-* **WSGI Server**: Gunicorn
-* **Infrastructure**: AWS (EC2, Security Groups, VPC)
+| Component | Description |
+| :--- | :--- |
+| **Reverse Proxy** | **Nginx** handles traffic on Port 80, providing a layer of security and performance. |
+| **WSGI Server** | **Gunicorn** manages Flask processes in **Single-Worker Mode** to maintain global memory consistency. |
+| **Service Mgmt** | **Systemd** manages the app as a persistent Linux service for high availability. |
+| **Hosting** | Deployed on **Amazon Linux 2023** within a secure VPC on **AWS EC2**. |
 
 ---
 
 ## 🚀 Infrastructure as Code (IaC)
+The entire server provisioning and configuration process is automated to ensure the environment is reproducible and scalable.
 
-I have automated the entire server setup to ensure one-click deployments. The `setup.sh` script handles:
-1.  System updates and dependency installation (`dnf`, `pip`).
-2.  Virtual environment provisioning.
-3.  Automated generation of **Systemd** service units.
-4.  Automated **Nginx** configuration and reverse-proxy mapping.
+### Automated Setup
+To deploy this project on a fresh instance, execute the included `setup.sh`:
 
-### How to Deploy
 ```bash
-git clone [https://github.com/YOUR_USERNAME/TicTacToe-Beatable-AI.git](https://github.com/YOUR_USERNAME/TicTacToe-Beatable-AI.git)
+git clone [https://github.com/AbhayChabuk/TicTacToe-Beatable-AI.git](https://github.com/AbhayChabuk/TicTacToe-Beatable-AI.git)
 cd TicTacToe-Beatable-AI
 chmod +x setup.sh
 ./setup.sh
