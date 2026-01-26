@@ -1,4 +1,4 @@
-# 🎮 Tic-Tac-Toe: Unbeatable AI on AWS
+# 🎮 Tic-Tac-Toe: Beatable AI on AWS
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
