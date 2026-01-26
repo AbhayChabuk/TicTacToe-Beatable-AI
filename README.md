@@ -4,7 +4,7 @@ A production-grade web application featuring a heuristic-driven AI engine, deplo
 
 ## 🌐 Live Application
 The game is currently live and accessible at:  
-**[http://3.109.211.113](http://3.109.211.113)** *(Deployed on AWS Free Tier)*
+**[http://3.109.211.113](http://http://15.206.3.137)** *(Deployed on AWS Free Tier)*
 
 ---
 
