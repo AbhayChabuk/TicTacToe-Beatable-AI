@@ -1,41 +1,169 @@
-# 🎮 Tic-Tac-Toe: Intelligent Rule-Based AI on AWS
+# 🎮 Tic-Tac-Toe AI — Evolution from Traditional Deployment to Containerized Cloud Architecture
 
-A production-grade web application featuring a heuristic-driven AI engine, deployed on a robust Amazon EC2 environment.
-
-## 🌐 Live Application
-The game is currently live and accessible at:  
-**[http://15.206.3.137](http://15.206.3.137)** *(Deployed on AWS Free Tier)*
+An end-to-end project demonstrating the transformation of a web application from a traditional single-server deployment to a containerized, production-style cloud architecture on AWS.
 
 ---
 
-## 🏗️ Cloud Architecture & Deployment
-This project demonstrates a professional-grade web stack optimized for AWS environments, ensuring high availability and state management.
+## 🌐 Live Deployment
 
-| Component | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Cloud Provider** | **AWS EC2** | Hosted on Amazon Linux 2023 within a secure VPC. |
-| **Reverse Proxy** | **Nginx** | Handles traffic on Port 80 and provides a security buffer. |
-| **WSGI Server** | **Gunicorn** | Configured in **Single-Worker Mode** to ensure board state consistency. |
-| **Service Mgmt** | **Systemd** | Manages the app as a background service for 24/7 uptime. |
+### 🟢 Current Deployment (Dockerized — Active)
 
----
+**Docker-based deployment on AWS EC2 (Cost-Optimized)**
+http://15.206.3.137
 
-## 🧠 AI Engine: Heuristic Decision Logic
-Instead of a simple random choice, the AI prioritizes moves based on the following heuristic hierarchy:
-
-1. **Immediate Win:** Completes its own line of three.
-2. **Defensive Block:** Stops the player from completing a line.
-3. **Strategic Positioning:** Prioritizes the center square `[1][1]`.
-4. **Corner Control:** Claims corners to set up "fork" traps.
-5. **Fallback:** Occupies the remaining empty cells.
+The application is currently running inside a Docker container on a single EC2 instance to remain within AWS Free Tier limits.
 
 ---
 
-## 🚀 Infrastructure as Code (IaC)
-To deploy this project on a fresh Amazon Linux instance, run the automated setup script:
+## 🧠 Project Evolution
 
-```bash
-git clone [https://github.com/AbhayChabuk/TicTacToe-Beatable-AI.git](https://github.com/AbhayChabuk/TicTacToe-Beatable-AI.git)
-cd TicTacToe-Beatable-AI
-chmod +x setup.sh
-./setup.sh
+### 🥇 Initial Deployment — Traditional Server Setup
+
+Originally, the application was deployed directly on AWS EC2 without containerization using:
+
+* Nginx reverse proxy
+* Gunicorn WSGI server
+* Systemd service for process management
+* Linux server configuration
+
+This represented a **classic production deployment approach** before adopting containerization.
+
+---
+
+### 🥈 Containerization Upgrade (Major Enhancement)
+
+The application was later Dockerized to achieve:
+
+* Environment consistency
+* Portability across systems
+* Simplified deployment process
+* Production parity between local and cloud environments
+
+Gunicorn was configured in single-worker mode to preserve game state consistency.
+
+---
+
+### 🥉 Scalable Cloud Architecture Implementation
+
+To simulate a production-grade system, the containerized application was deployed behind AWS infrastructure services:
+
+* Application Load Balancer for traffic distribution
+* Auto Scaling Group for automatic scaling
+* Multi-instance deployment
+* Self-healing capability via health checks
+
+This architecture ensured high availability and fault tolerance.
+
+---
+
+### 💸 Cost Optimization Decision
+
+Since Load Balancers and multiple EC2 instances incur charges outside the free tier:
+
+* Load Balancer and Auto Scaling Group were disabled after testing
+* Deployment reverted to single-instance Docker setup
+
+This demonstrates practical awareness of cloud cost management.
+
+---
+
+# 🏗️ Architecture Comparison
+
+## Before (Traditional Deployment)
+
+Users → Nginx → Gunicorn → Flask App (Single EC2)
+
+---
+
+## After (Containerized Deployment)
+
+Users → EC2 → Docker Container → Flask App
+
+---
+
+## Production Architecture (Tested)
+
+Users → Application Load Balancer → Auto Scaling Group → EC2 Instances → Docker Containers → Flask App
+
+---
+
+# 🚀 Features Implemented
+
+## 🐳 Containerization
+
+* Dockerized Flask application
+* Production server using Gunicorn
+* Debugged multi-worker state issues
+
+## ☁️ Cloud Deployment
+
+* AWS EC2 hosting
+* Security group configuration
+* Public internet accessibility
+
+## ⚖️ Scalability & Reliability (Tested)
+
+* Load balancing
+* Auto scaling
+* Multi-AZ deployment concepts
+* Self-healing infrastructure
+
+## 🔍 Production Troubleshooting
+
+Resolved real deployment issues including:
+
+* Gunicorn concurrency problems
+* Load balancer health check failures
+* Security group communication
+* Container lifecycle management
+
+---
+
+# 🧠 AI Engine
+
+Heuristic-based AI prioritizing:
+
+1. Winning move
+2. Blocking opponent
+3. Center control
+4. Corner strategy
+5. Remaining cells
+
+---
+
+# 🛠️ Tech Stack
+
+### Application
+
+* Python
+* Flask
+* HTML/CSS/JavaScript
+
+### DevOps & Cloud
+
+* AWS EC2
+* Docker
+* Application Load Balancer
+* Auto Scaling Group
+* Gunicorn
+* Nginx
+* Linux (Ubuntu)
+* Git & GitHub
+
+---
+
+# 🎯 Key Learning Outcomes
+
+* Traditional vs containerized deployment approaches
+* End-to-end cloud deployment
+* High availability architecture design
+* Infrastructure debugging
+* Cost-aware cloud engineering
+
+---
+
+# 👨‍💻 Author
+
+**Abhay — Computer Engineering Student**
+
+Aspiring DevOps & Cloud Engineer 🚀
