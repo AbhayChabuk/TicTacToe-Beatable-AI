@@ -23,3 +23,20 @@ jobs:
 
     - name: Push Docker Image
       run: docker push abhaychabuk/tictactoe-ai:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to EC2 via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          docker pull abhaychabuk/tictactoe-ai:latest
+          docker stop tictactoe || true
+          docker rm tictactoe || true
+          docker run -d -p 80:8000 --name tictactoe abhaychabuk/tictactoe-ai:latest

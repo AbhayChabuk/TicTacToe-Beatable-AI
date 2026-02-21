@@ -14,3 +14,4 @@ EXPOSE 8000
 
 CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:8000", "application:application"]
 
+
