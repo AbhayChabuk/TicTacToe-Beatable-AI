@@ -19,7 +19,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t xyz/tictactoe-ai:latest .
+      run: docker build -t abhaychabuk/tictactoe-ai:latest .
 
     - name: Push Docker Image
-      run: docker push xyz/tictactoe-ai:latest
+      run: docker push abhaychabuk/tictactoe-ai:latest
