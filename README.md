@@ -1,6 +1,6 @@
 # 🎮 Tic-Tac-Toe AI — Evolution from Traditional Deployment to Containerized Cloud Architecture
 
-An end-to-end project demonstrating the transformation of a web application from a traditional single-server deployment to a containerized, production-style cloud architecture on AWS.
+An end-to-end project demonstrating the transformation of a web application from a traditional single-server deployment to a containerized, production-style cloud architecture on Amazon Web Services (AWS).
 
 ---
 
@@ -21,10 +21,10 @@ The application is currently running inside a Docker container on a single EC2 i
 
 Originally, the application was deployed directly on AWS EC2 without containerization using:
 
-* Nginx reverse proxy
-* Gunicorn WSGI server
-* Systemd service for process management
-* Linux server configuration
+- Nginx reverse proxy
+- Gunicorn WSGI server
+- Systemd service for process management
+- Linux server configuration
 
 This represented a **classic production deployment approach** before adopting containerization.
 
@@ -34,10 +34,10 @@ This represented a **classic production deployment approach** before adopting co
 
 The application was later Dockerized to achieve:
 
-* Environment consistency
-* Portability across systems
-* Simplified deployment process
-* Production parity between local and cloud environments
+- Environment consistency
+- Portability across systems
+- Simplified deployment process
+- Production parity between local and cloud environments
 
 Gunicorn was configured in single-worker mode to preserve game state consistency.
 
@@ -47,10 +47,10 @@ Gunicorn was configured in single-worker mode to preserve game state consistency
 
 To simulate a production-grade system, the containerized application was deployed behind AWS infrastructure services:
 
-* Application Load Balancer for traffic distribution
-* Auto Scaling Group for automatic scaling
-* Multi-instance deployment
-* Self-healing capability via health checks
+- Application Load Balancer for traffic distribution
+- Auto Scaling Group for automatic scaling
+- Multi-instance deployment
+- Self-healing capability via health checks
 
 This architecture ensured high availability and fault tolerance.
 
@@ -60,8 +60,8 @@ This architecture ensured high availability and fault tolerance.
 
 Since Load Balancers and multiple EC2 instances incur charges outside the free tier:
 
-* Load Balancer and Auto Scaling Group were disabled after testing
-* Deployment reverted to single-instance Docker setup
+- Load Balancer and Auto Scaling Group were disabled after testing
+- Deployment reverted to single-instance Docker setup
 
 This demonstrates practical awareness of cloud cost management.
 
@@ -91,31 +91,31 @@ Users → Application Load Balancer → Auto Scaling Group → EC2 Instances →
 
 ## 🐳 Containerization
 
-* Dockerized Flask application
-* Production server using Gunicorn
-* Debugged multi-worker state issues
+- Dockerized Flask application
+- Production server using Gunicorn
+- Debugged multi-worker state issues
 
 ## ☁️ Cloud Deployment
 
-* AWS EC2 hosting
-* Security group configuration
-* Public internet accessibility
+- AWS EC2 hosting
+- Security group configuration
+- Public internet accessibility
 
 ## ⚖️ Scalability & Reliability (Tested)
 
-* Load balancing
-* Auto scaling
-* Multi-AZ deployment concepts
-* Self-healing infrastructure
+- Load balancing
+- Auto scaling
+- Multi-AZ deployment concepts
+- Self-healing infrastructure
 
 ## 🔍 Production Troubleshooting
 
 Resolved real deployment issues including:
 
-* Gunicorn concurrency problems
-* Load balancer health check failures
-* Security group communication
-* Container lifecycle management
+- Gunicorn concurrency problems
+- Load balancer health check failures
+- Security group communication
+- Container lifecycle management
 
 ---
 
@@ -135,30 +135,30 @@ Heuristic-based AI prioritizing:
 
 ### Application
 
-* Python
-* Flask
-* HTML/CSS/JavaScript
+- Python
+- Flask
+- HTML/CSS/JavaScript
 
 ### DevOps & Cloud
 
-* AWS EC2
-* Docker
-* Application Load Balancer
-* Auto Scaling Group
-* Gunicorn
-* Nginx
-* Linux (Ubuntu)
-* Git & GitHub
+- AWS EC2
+- Docker
+- Application Load Balancer
+- Auto Scaling Group
+- Gunicorn
+- Nginx
+- Linux (Ubuntu)
+- Git & GitHub
 
 ---
 
 # 🎯 Key Learning Outcomes
 
-* Traditional vs containerized deployment approaches
-* End-to-end cloud deployment
-* High availability architecture design
-* Infrastructure debugging
-* Cost-aware cloud engineering
+- Traditional vs containerized deployment approaches
+- End-to-end cloud deployment
+- High availability architecture design
+- Infrastructure debugging
+- Cost-aware cloud engineering
 
 ---
 
