@@ -139,9 +139,3 @@ def reset():
 if __name__ == "__main__":
     application.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
 
-
-
-
-
-
->>>>>>> f65f6d649f80d50bc307086155c03a6c321fbf7e
