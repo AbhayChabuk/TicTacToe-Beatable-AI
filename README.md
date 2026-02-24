@@ -160,10 +160,3 @@ Heuristic-based AI prioritizing:
 - Infrastructure debugging
 - Cost-aware cloud engineering
 
----
-
-# 👨‍💻 Author
-
-**Abhay — Computer Engineering Student**
-
-Aspiring DevOps & Cloud Engineer 🚀
