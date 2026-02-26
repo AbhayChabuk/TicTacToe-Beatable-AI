@@ -1,162 +1,195 @@
-# 🎮 Tic-Tac-Toe AI — Evolution from Traditional Deployment to Containerized Cloud Architecture
+# 🎮 Tic-Tac-Toe AI | Scalable Containerized Cloud Deployment
 
-An end-to-end project demonstrating the transformation of a web application from a traditional single-server deployment to a containerized, production-style cloud architecture on Amazon Web Services (AWS).
+A production-style cloud project demonstrating the end-to-end journey of building, containerizing, scaling, and automating the deployment of an intelligent web application on AWS using modern DevOps practices.
 
----
-
-## 🌐 Live Deployment
-
-### 🟢 Current Deployment (Dockerized — Active)
-
-**Docker-based deployment on AWS EC2 (Cost-Optimized)**
-http://15.206.3.137
-
-The application is currently running inside a Docker container on a single EC2 instance to remain within AWS Free Tier limits.
+This project combines **application development, heuristic AI decision-making, cloud architecture, scalability engineering, and CI/CD automation** into a single real-world deployment scenario.
 
 ---
 
-## 🧠 Project Evolution
+## 🧠 Project Overview
 
-### 🥇 Initial Deployment — Traditional Server Setup
+The project began as a locally developed Flask web application implementing an intelligent Tic-Tac-Toe opponent. It was progressively transformed into a cloud-native system capable of scalable deployment and automated delivery, simulating real production environments.
 
-Originally, the application was deployed directly on AWS EC2 without containerization using:
+**Key goals:**
 
-- Nginx reverse proxy
-- Gunicorn WSGI server
-- Systemd service for process management
-- Linux server configuration
-
-This represented a **classic production deployment approach** before adopting containerization.
-
----
-
-### 🥈 Containerization Upgrade (Major Enhancement)
-
-The application was later Dockerized to achieve:
-
-- Environment consistency
-- Portability across systems
-- Simplified deployment process
-- Production parity between local and cloud environments
-
-Gunicorn was configured in single-worker mode to preserve game state consistency.
+- Build an intelligent rule-based AI opponent  
+- Deploy the application using containerization  
+- Design scalable cloud infrastructure  
+- Implement automated deployment pipeline  
+- Demonstrate cost-aware cloud resource management  
 
 ---
 
-### 🥉 Scalable Cloud Architecture Implementation
+## 🧩 Application Development
 
-To simulate a production-grade system, the containerized application was deployed behind AWS infrastructure services:
+### Web Application
 
-- Application Load Balancer for traffic distribution
-- Auto Scaling Group for automatic scaling
-- Multi-instance deployment
-- Self-healing capability via health checks
-
-This architecture ensured high availability and fault tolerance.
+- Backend built using **Python (Flask)**
+- RESTful endpoints for gameplay interactions
+- Dynamic frontend using HTML, CSS, and JavaScript
+- Interactive browser-based UI
 
 ---
 
-### 💸 Cost Optimization Decision
+## 🧠 AI Engine — Heuristic Decision Logic
 
-Since Load Balancers and multiple EC2 instances incur charges outside the free tier:
+The AI opponent uses a prioritized rule-based strategy instead of random moves, enabling competitive gameplay without complex machine learning models.
 
-- Load Balancer and Auto Scaling Group were disabled after testing
-- Deployment reverted to single-instance Docker setup
+### Decision Hierarchy
 
-This demonstrates practical awareness of cloud cost management.
+1. **Immediate Win Detection** — Completes its own line of three if possible  
+2. **Defensive Blocking** — Prevents the player from winning  
+3. **Strategic Center Control** — Prioritizes occupying the center square  
+4. **Corner Dominance** — Attempts to control corners to create fork opportunities  
+5. **Fallback Move Selection** — Chooses remaining available positions  
 
----
-
-# 🏗️ Architecture Comparison
-
-## Before (Traditional Deployment)
-
-Users → Nginx → Gunicorn → Flask App (Single EC2)
+This heuristic approach demonstrates algorithmic decision-making and game strategy implementation.
 
 ---
-
-## After (Containerized Deployment)
-
-Users → EC2 → Docker Container → Flask App
-
----
-
-## Production Architecture (Tested)
-
-Users → Application Load Balancer → Auto Scaling Group → EC2 Instances → Docker Containers → Flask App
-
----
-
-# 🚀 Features Implemented
 
 ## 🐳 Containerization
 
-- Dockerized Flask application
-- Production server using Gunicorn
-- Debugged multi-worker state issues
+The application was containerized using Docker to ensure:
 
-## ☁️ Cloud Deployment
+- Consistent runtime environment  
+- Portability across systems  
+- Simplified deployment  
 
-- AWS EC2 hosting
-- Security group configuration
-- Public internet accessibility
+**Key components:**
 
-## ⚖️ Scalability & Reliability (Tested)
-
-- Load balancing
-- Auto scaling
-- Multi-AZ deployment concepts
-- Self-healing infrastructure
-
-## 🔍 Production Troubleshooting
-
-Resolved real deployment issues including:
-
-- Gunicorn concurrency problems
-- Load balancer health check failures
-- Security group communication
-- Container lifecycle management
+- Production-ready Dockerfile  
+- Gunicorn WSGI server inside container  
+- Optimized dependency installation  
+- Exposed application port  
 
 ---
 
-# 🧠 AI Engine
+## ☁️ Cloud Deployment (AWS)
 
-Heuristic-based AI prioritizing:
+The containerized application was deployed on AWS infrastructure.
 
-1. Winning move
-2. Blocking opponent
-3. Center control
-4. Corner strategy
-5. Remaining cells
+### Core Deployment Features
 
----
-
-# 🛠️ Tech Stack
-
-### Application
-
-- Python
-- Flask
-- HTML/CSS/JavaScript
-
-### DevOps & Cloud
-
-- AWS EC2
-- Docker
-- Application Load Balancer
-- Auto Scaling Group
-- Gunicorn
-- Nginx
-- Linux (Ubuntu)
-- Git & GitHub
+- Hosting on AWS EC2  
+- Secure network configuration via security groups  
+- Public internet accessibility  
+- Production-style server configuration  
 
 ---
 
-# 🎯 Key Learning Outcomes
+## ⚖️ Scalability & High Availability
 
-- Traditional vs containerized deployment approaches
-- End-to-end cloud deployment
-- High availability architecture design
-- Infrastructure debugging
-- Cost-aware cloud engineering
+To simulate real-world infrastructure, the deployment was extended to support scalability:
+
+- Application Load Balancer for traffic distribution  
+- Target Groups with health checks  
+- Auto Scaling Group for automatic instance management  
+- Multi-instance deployment across availability zones  
+- Self-healing through automatic instance replacement  
+
+This architecture ensures service continuity during failures or traffic spikes.
+
+---
+
+## 🔁 CI/CD Automation
+
+A fully automated deployment pipeline was implemented using GitHub Actions.
+
+### Automated Workflow
+
+On every code push:
+
+1. Build Docker image  
+2. Push image to Docker Hub  
+3. Secure SSH deployment to EC2  
+4. Pull latest container image  
+5. Replace running container  
+6. Application updates automatically  
+
+This eliminates manual deployment steps and enables continuous delivery.
+
+---
+
+## 💸 Cost Optimization
+
+After validating scalability and automation features, cloud resources were responsibly decommissioned to prevent unnecessary charges, demonstrating practical cost management in cloud environments.
+
+---
+
+## 🧠 DevOps Practices Demonstrated
+
+- Containerized deployments  
+- Infrastructure scalability design  
+- Automated CI/CD pipeline  
+- Production debugging & troubleshooting  
+- Secure secrets management  
+- Resource lifecycle management  
+- Cost-aware cloud usage  
+
+---
+
+## 🛠️ Technology Stack
+
+### Cloud & DevOps
+
+- AWS EC2  
+- Application Load Balancer  
+- Auto Scaling Group  
+- GitHub Actions  
+- Docker & Docker Hub  
+
+### Backend
+
+- Python (Flask)  
+- Gunicorn  
+
+### Frontend
+
+- HTML  
+- CSS  
+- JavaScript  
+
+---
+
+## 📊 Deployment Evolution
+
+**Phase 1 — Local Development**  
+Flask application with heuristic AI logic.
+
+**Phase 2 — Containerization**  
+Docker-based deployment.
+
+**Phase 3 — Scalable Infrastructure**  
+Load balancing and auto scaling.
+
+**Phase 4 — CI/CD Automation**  
+Automated build and deployment pipeline.
+
+---
+
+## 📈 Key Learnings
+
+- Designing scalable cloud systems  
+- Implementing containerized architectures  
+- Automating deployment workflows  
+- Troubleshooting production issues  
+- Balancing performance and cost  
+
+---
+
+## 🚀 Future Enhancements
+
+- Monitoring & logging integration  
+- HTTPS and domain configuration  
+- Advanced security hardening  
+- Private subnet architecture  
+- Zero-downtime deployment strategies  
+
+---
+
+## 👨‍💻 Author
+
+**Abhay Chabuk**  
+Final-Year Computer Engineering Student  
+Aspiring Cloud & DevOps Engineer
 
